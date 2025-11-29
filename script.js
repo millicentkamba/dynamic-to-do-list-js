@@ -1,23 +1,20 @@
-// Ensure the script runs after the DOM content has fully loaded
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Step 2: Select DOM elements
+    // Select DOM elements
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    // Step 3: Define function to add a task
+    // Function to add a task
     function addTask() {
-        // Get trimmed input text
         const taskText = taskInput.value.trim();
 
-        // Alert if input is empty
         if (taskText === "") {
             alert("Please enter a task.");
             return;
         }
 
-        // Step 4: Create new list item (li)
+        // Create the li element with text
         const li = document.createElement('li');
         li.textContent = taskText;
 
@@ -26,33 +23,27 @@ document.addEventListener('DOMContentLoaded', function() {
         removeBtn.textContent = "Remove";
         removeBtn.className = "remove-btn";
 
-        // Remove task when button is clicked
+        // Remove task when clicked
         removeBtn.onclick = function() {
             taskList.removeChild(li);
         };
 
-        // Append remove button to list item
+        // Append button to li, and li to ul
         li.appendChild(removeBtn);
-
-        // Append list item to task list
         taskList.appendChild(li);
 
         // Clear input field
         taskInput.value = "";
     }
 
-    // Step 5: Attach event listeners
-
-    // Add task on button click
+    // Add task when clicking the button
     addButton.addEventListener('click', addTask);
 
-    // Add task when pressing Enter key
+    // Add task when pressing Enter
     taskInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             addTask();
         }
     });
 
-    // Call addTask on DOMContentLoaded (per instructions)
-    addTask();
 });
